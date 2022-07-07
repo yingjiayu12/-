@@ -1,0 +1,164 @@
+html, body {
+    font-family: 'PingFang SC', 'Microsoft Yahei', sans-serif;
+}
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?tomleg');
+    src:  url('fonts/icomoon.eot?tomleg#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?tomleg') format('truetype'),
+      url('fonts/icomoon.woff?tomleg') format('woff'),
+      url('fonts/icomoon.svg?tomleg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+.background {
+    width: 100vw;
+    height: 100vh;
+    background: url(rain.png) fixed no-repeat;
+    /* 把背景图片放大到适合元素容器的尺寸，图片比例不变，但是要注意，超出容器的部分可能会裁掉。 */
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.content {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /* background: url(rain.png) fixed no-repeat; */
+    /* 把背景图片放大到适合元素容器的尺寸，图片比例不变，但是要注意，超出容器的部分可能会裁掉。 */
+    /* background-size: cover; */
+    display: flex;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+/* 关闭框 */
+.content span {
+    position: absolute;
+    font-size: 16px;
+    right: calc(50% - 210px);
+    top: calc(50% - 190px);
+    background-color:rgba(255, 255, 255, .3);
+    /* border: #ebebeb solid 1px; */
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 40px;
+    z-index: 11;
+    pointer-events: auto;
+}
+a {
+    color: #3d5245;
+    text-decoration: none;
+}
+/* 开启框 */
+.background::before {
+    pointer-events: auto;
+    content: '\e919';
+    font-family: 'icomoon';
+    font-size: 60px;
+    position: absolute;
+    right: calc(50% - 30px);top: 0;
+    z-index: 2;
+}
+.login-form {
+    pointer-events: auto;
+    width: 300px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 100;
+    /* 从父亲哪里来继承背景图片 */
+    background: inherit;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.login-form::before {
+    background-color: pink;
+    content: '';
+    /* 记住这里又一个大坑,如果使用calc函数且如以下这样使用
+    切记加号前后要留有空格,不然会有invaild property value的错误 */
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    overflow: hidden;
+    background: inherit;
+    box-shadow:inset 0 0 0 200px rgba(255,255,255,.25);
+    filter: blur(5px);
+    z-index: -1;
+}
+.login-form h2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #3d5245;
+    margin-bottom: 20px;
+}
+.login-form input,
+.login-form button {
+    margin: 8px 0;
+    height: 36px;
+    border: none;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 4px;
+    padding: 0 14px;
+    color: #3d5245;
+    outline: none;
+}
+.login-form input::placeholder {
+    color: #3d5245;
+}
+.login-form button {
+    margin-top: 30px;
+    background-color: rgba(209,179,0,.4);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .4s;
+}
+/* 绿色滚动动画 */
+.login-form button:hover {
+    background-color: rgba(209,179,0,.7);
+}
+.login-form button::before,
+.login-form button::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: rgba(179,255,210,.5);
+    opacity: .5;
+    position: absolute;
+    top: 0;left: 0;
+    transform: skewX(-15deg);
+    filter: blur(30px);
+    overflow: hidden;
+    transform: translateX(-100px);
+}
+.login-form button:hover::after,
+.login-form button:hover::before {
+    width: 40px;
+    background-color: rgba(179,255,210,.3);
+    left: 60px;
+    opacity: 0;
+    filter: blur(5px);
+}
+.login-form button:hover::before {
+    transition: 1s;
+    transform: translateX(320px);
+    opacity: .7;
+}
+.login-form button:hover::after {
+    transition: 1s;
+    transform: translateX(320px);
+    opacity: 1;
+}
