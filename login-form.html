@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        "use strict"
+    </script>
+    <link rel="stylesheet" href="login-form.css">
+    <link rel="stylesheet" href="rain.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 模糊模块css */
+        .loading-text {
+            position: absolute;
+            left: calc(50% - 50px);
+            top: calc(50% - 48px);
+            font-size: 50px;
+            color: #fff;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="rainBox"></div>
+    <section class="loading-text">0%</section>
+    <div class="background">
+        <div class="content">
+            <span><a href="javascript:void(0);" class="close-login" id="closeBtn">关闭</a></span>
+            <form action="../个人简介/index.html" class="login-form">
+                <h2>登录</h2>
+                <input type="text" class="username" placeholder="用户名">
+                <input type="password" class="password" placeholder="密码">
+                <button type="submit">登录</button>
+            </form>
+        </div>
+    </div>
+    <script src="rain.js"></script>
+    <script src="zhanghao.js"></script>
+    <script>
+        // 开启与关闭部分
+        var flag = 0;
+        var background = document.querySelector('.background');
+        var content = document.querySelector('.content');
+        var close_login = document.querySelector('.close-login');
+        var login_form = document.querySelector('.login-form');
+        background.addEventListener('click', function () {
+            if (flag == 0) {
+                content.style.display = 'flex';
+                flag = 1;
+            }
+        })
+        close_login.addEventListener('click', function () {
+            if (flag == 1) {
+                event.stopPropagation();
+                content.style.display = 'none';
+                flag = 0;
+            }
+        })
+        // 模糊加载模块
+        var load_text = document.querySelector('.loading-text');
+        var load = 0; let mouhu_timer = setInterval(blurring, 30);
+        var mouhu = document.querySelector('.mouhu');
+        function scale(num, now) {
+            return (-load / 100 * (now) + now);
+        }
+        function blurring() {
+            load++;
+            if (load > 99) {
+                clearInterval(mouhu_timer);
+            }
+            load_text.innerHTML = load + '%';
+            load_text.style.opacity = scale(load, 1);
+            var _blur = scale(load, 30) + 'px';
+            background.style.filter = `blur(${_blur})`;
+        }
+    </script>
+    <noscript>sorry,你的浏览器不支持javascipt语言</noscript>
+</body>
+
+</html>
