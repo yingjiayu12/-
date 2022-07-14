@@ -5,3 +5,4 @@
 进入之后点击上方按钮将会展现注册框</br>
 整体有雨滴下落动画</br>
 代码解释将陆续弥补</br>
+可以去我的csdn来观看有解释版的代码 https://blog.csdn.net/yingjiayu12/article/details/125665909
